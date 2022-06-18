@@ -3,13 +3,14 @@
 </script>
 
 <div class="contianer-fluid bg">
-    <div class="row">
-        <p class="col-md mx-3 my-2">
+    <div class="row" style="max-width: 100%">
+        <p class="col-md mx-2 my-2">
             Site by: Mac Barrett<br>
-            2022
+            <a href="https://github.com/Mac-Barrett">github.com/Mac-Barrett</a> | <a href="https://www.linkedin.com/in/mac-barrett-0951b6225/">linkedin.com/in/mac-barrett</a><br>
+            Last edit: 2022
         </p>
 
-        <p class="col-md mx-3 my-2">
+        <p class="col-md mx-2 my-2">
             Pokémon © 2002-2022 Pokémon. © 1995-2022<br> 
             Nintendo/Creatures Inc./GAME FREAK inc. TM, ® and Pokémon character names are trademarks of Nintendo.<br>
             No copyright or trademark infringement is intended.
@@ -18,10 +19,9 @@
 </div>
 
 <style>
-    h1 {
-        text-align: center;
-        color:slategray;
-        margin: 0 auto;
+    .row {
+        padding:0;
+        margin:0;
     }
 
     p {
