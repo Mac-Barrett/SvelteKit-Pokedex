@@ -1,11 +1,35 @@
 <script lang="ts">
-    import { DataSlot } from "../index";
+    import { DataSlot, dataType } from '$lib';
 
-    export var data;
+    export var PokemonData : Array<string>;
+    const dataTypeSequence = [
+        dataType.TEXT,
+        dataType.LINK,
+        dataType.IMAGE,
+        dataType.TYPES,
+        dataType.TEXT,
+        dataType.TEXT,
+        dataType.TEXT,
+        dataType.TEXT,
+        dataType.TEXT,
+        dataType.TEXT
+    ]
 </script>
 
-
+<div class="row">
+    {#each PokemonData as dataForSlot, i}
+        <div class="col">
+            <DataSlot data={dataForSlot} type={dataTypeSequence[i]}/>
+        </div>
+    {/each}
+</div>
 
 <style>
-
+    .row {
+        max-height: 64px;
+    }
+    .col {
+        border: 1px solid black;
+        width:10%;
+    }
 </style>

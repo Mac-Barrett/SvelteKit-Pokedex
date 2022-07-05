@@ -1,41 +1,51 @@
 <script lang="ts" context="module">
     export enum dataType {
-        image,
-        imageX2,
-        text,
-        link
+        IMAGE,
+        TYPES,
+        TEXT,
+        LINK
     }
 </script>
 
 <script lang="ts">
-    const IMG_PATH : string = '/res/imgs/';
-    const BULBAPEDIA_PATH : string = 'https://bulbapedia.bulbagarden.net/wiki/';
+    const IMG_PATH = (dexNum : string) : string => `https://archives.bulbagarden.net/media/upload/a/ad/Spr_2g_${dexNum}.png`;
+    const WIKI_PATH : string = 'https://bulbapedia.bulbagarden.net/wiki/';
     export var data : string;
     export var type : dataType;
 </script>
 
-<div class="container">
-    {#if type === dataType.image}
-    <div class="row">
-        <img src={data} alt="" srcset="">
-    </div>
-    {:else if type === dataType.imageX2}
-    <div class="row">
-        <img src={data.split("|")[0]} alt="">
-        <img src={data.split("|")[1]} alt="">
-    </div>
-    {:else if type === dataType.text}
-    <div class="row">
+    {#if type === dataType.IMAGE}
+        <img src={data} alt={data}>
+    {:else if type === dataType.TYPES}
+        {#if data.split("|").length > 1}
+            <img class="type-icon" src={data.split("|")[0]} alt={data.split("|")[0]}>
+            <img class="type-icon" src={data.split("|")[1]} alt={data.split("|")[1]}>
+        {:else}
+            <img class="type-icon" src={data} alt={data}>
+        {/if}
+    {:else if type === dataType.TEXT}
         <p>{data}</p>
-    </div>
     {:else}
-    <div class="row">
-        <p><a href={BULBAPEDIA_PATH + data}>{data}</a></p>
-    </div>
+        <p><a href={WIKI_PATH + data}>{data}</a></p>
     {/if}
-</div>
 
 
 <style>
+    p {
+        text-align: center;
+        font-family: monospace;
+    }
+    a {
+        color: black;
+    }
 
+    img {
+        height: 64px;
+        width: 64px;
+    }
+
+    img.type-icon {
+        height: 30px;
+        width: 60px;
+    }
 </style>
