@@ -8,7 +8,6 @@
 </script>
 
 <script lang="ts">
-    const IMG_PATH = (dexNum : string) : string => `https://archives.bulbagarden.net/media/upload/a/ad/Spr_2g_${dexNum}.png`;
     const WIKI_PATH : string = 'https://bulbapedia.bulbagarden.net/wiki/';
     export var data : string;
     export var type : dataType;
@@ -18,10 +17,10 @@
         <img src={data} alt={data}>
     {:else if type === dataType.TYPES}
         {#if data.split("|").length > 1}
-            <img class="type-icon" src={data.split("|")[0]} alt={data.split("|")[0]}>
-            <img class="type-icon" src={data.split("|")[1]} alt={data.split("|")[1]}>
+            <img class="type-icon" src={`/res/${data.split("|")[0]}.png`} alt={data.split("|")[0]}>
+            <img class="type-icon" src={`/res/${data.split("|")[1]}.png`} alt={data.split("|")[1]}>
         {:else}
-            <img class="type-icon" src={data} alt={data}>
+            <img class="type-icon" src={`/res/${data}.png`} alt={data}>
         {/if}
     {:else if type === dataType.TEXT}
         <p>{data}</p>
@@ -40,12 +39,12 @@
     }
 
     img {
-        height: 64px;
-        width: 64px;
+        max-height: 64px;
+        max-width: 64px;
     }
 
     img.type-icon {
-        height: 30px;
-        width: 60px;
+        max-height: 30px;
+        max-width: 60px;
     }
 </style>
