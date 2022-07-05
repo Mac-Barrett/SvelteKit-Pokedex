@@ -18,7 +18,7 @@
 
 <div class="row">
     {#each PokemonData as dataForSlot, i}
-        <div class="col">
+        <div class="col p-0">
             <DataSlot data={dataForSlot} type={dataTypeSequence[i]}/>
         </div>
     {/each}
