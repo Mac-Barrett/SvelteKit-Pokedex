@@ -1,13 +1,17 @@
 import Header from "./_components/Header.svelte";
 import Footer from "./_components/Footer.svelte";
-import DataSlot from "./_components/DataSlot.svelte";
-import { dataType } from "./_components/DataSlot.svelte";
 import Pokerow from "./_components/Pokerow.svelte";
 
 export {
     Header,
     Footer,
-    DataSlot,
-    dataType,
     Pokerow
 };
+
+export interface IPokemon {
+    DexNum: string,
+    Name:   string,
+    Sprite: string,
+    Types:  string,
+    Stats: Array<string>;
+}

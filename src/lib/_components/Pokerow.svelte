@@ -1,26 +1,32 @@
 <script lang="ts">
-    import { DataSlot, dataType } from '$lib';
+    import type { IPokemon } from '$lib';
 
-    export var PokemonData : Array<string>;
-    const dataTypeSequence = [
-        dataType.TEXT,
-        dataType.LINK,
-        dataType.IMAGE,
-        dataType.TYPES,
-        dataType.TEXT,
-        dataType.TEXT,
-        dataType.TEXT,
-        dataType.TEXT,
-        dataType.TEXT,
-        dataType.TEXT
-    ]
+    export var data : IPokemon;
+    const WIKI_PATH = "https://bulbapedia.bulbagarden.net/wiki/";
 </script>
 
 <div class="row">
-    {#each PokemonData as dataForSlot, i}
-        <div class="col p-0">
-            <DataSlot data={dataForSlot} type={dataTypeSequence[i]}/>
-        </div>
+    <div class="col">
+        <p>{data.DexNum}</p>
+    </div>
+    <div class="col">
+        <p><a href={WIKI_PATH} target="_blank">{data.Name}</a></p>
+    </div>
+    <div class="col">
+        <img src={data.Sprite} alt={data.Name}>
+    </div>
+    <div class="col">
+        {#if data.Types.split("|").length > 1}
+        <img class="type-icon" src={`/res/${data.Types.split("|")[0]}.png`} alt={data.Types.split("|")[0]}>
+        <img class="type-icon" src={`/res/${data.Types.split("|")[1]}.png`} alt={data.Types.split("|")[1]}>
+        {:else}
+        <img class="type-icon" src={`/res/${data.Types}.png`} alt={data.Types}>
+        {/if}
+    </div>
+    {#each data.Stats as stat, i}
+    <div class="col" id={`type-${i}`}>
+        <p>{stat}</p>
+    </div>
     {/each}
 </div>
 
@@ -30,6 +36,20 @@
     }
     .col {
         border: 1px solid black;
-        width:10%;
+        width: 10%;
+        padding:0;
+    }
+    p {
+        text-align: center;
+        font-family: monospace;
+        padding:0;
+        margin:0;
+    }
+    a {
+        color: black;
+    }
+    img {
+        max-height: 64px;
+        max-width: 64px;
     }
 </style>

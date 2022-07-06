@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Pokerow } from "$lib";
+    import { Pokerow, type IPokemon } from "$lib";
     import { onMount } from "svelte";
 
-    const numPokemon : number = 251
-    let Pokedex : Array<Array<string>> = new Array(numPokemon);
+    const numPokemon : number = 9
+    let Pokedex : Array<IPokemon> = new Array(numPokemon);
     let data = new Array<string>(10);
     let done : boolean = false;
     onMount(() => {
@@ -14,19 +14,24 @@
     });
 
     async function loadPokedex(): Promise<any> {
-        for (let id = 1; id <= numPokemon; id++) {
+        for (let id = 1; id <= Pokedex.length; id++) {
             Pokedex[id - 1] = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
                 .then(response => response.json())
                 .then(data => {
-                    let pokemon : Array<string> = new Array(10);
-                    pokemon[0] = id.toString();
-                    pokemon[1] = data["name"];
-                    pokemon[2] = data["sprites"]["front_default"];
-                    pokemon[3] = (data["types"].length == 1) ? data["types"][0]["type"]["name"] : `${data["types"][0]["type"]["name"]}|${data["types"][1]["type"]["name"]}`;
-                    for (let stat = 0; stat < 6; stat++) {
-                        pokemon[4 + stat] = data["stats"][stat]["base_stat"].toString();
+                    let stats : string[] = new Array<string>(6);
+                    for (let i = 0; i < stats.length; i++) {
+                        stats[i] = data["stats"][i]["base_stat"].toString();
                     }
-                    return pokemon;
+                    let types : string = (data["types"].length == 1) ? 
+                        data["types"][0]["type"]["name"] : `${data["types"][0]["type"]["name"]}|${data["types"][1]["type"]["name"]}`;
+                    let Pokemon: IPokemon = {
+                        DexNum: id.toString(),
+                        Name:   data["name"],
+                        Sprite: data["sprites"]["front_default"],
+                        Types:  types,
+                        Stats:  stats
+                    }
+                    return Pokemon;
                 });
             console.log(Pokedex[id])
         }
@@ -49,7 +54,7 @@
     </div>
     {#if done}
         {#each Pokedex as pokemon}
-            <Pokerow PokemonData={pokemon}/>
+            <Pokerow data={pokemon}/>
         {/each}
     {/if}
 </div>
@@ -64,8 +69,8 @@
         text-align: center;
 
         font-family: monospace;
+        font-size: 1.25em;
         background-color: slategray;
-
     }
 
     #HP {
@@ -78,13 +83,12 @@
         background-color: yellow;
     }
     #SpAtk {
-        background-color: cyan;
+        background-color: greenyellow;
     }
     #SpDef {
-        background-color: greenyellow;
+        background-color: cyan;
     }
     #Speed {
         background-color: darkorchid;
     }
-
 </style>

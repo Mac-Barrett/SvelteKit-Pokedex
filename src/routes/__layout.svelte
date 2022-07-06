@@ -17,4 +17,23 @@
     div {
         min-height: calc(100vh - 15em); /* 100vh - (height of Header.svelte + height of Footer.svelte) [10em + 5em = 15em] */
     }
+
+    :global(#type-0) {
+        background-color: rgba(255, 0, 0, 0.25);
+    }
+    :global(#type-1) {
+        background-color: rgba(215, 125, 0, 0.25);
+    }
+    :global(#type-2) {
+        background-color: rgba(255, 255, 0, 0.25);
+    }
+    :global(#type-3) {
+        background-color: rgba(50, 255, 50, 0.25);
+    }
+    :global(#type-4) {
+        background-color: rgba(0, 255, 255, 0.25);
+    }
+    :global(#type-5) {
+        background-color: rgba(153, 50, 204, 0.25);
+    }
 </style>
