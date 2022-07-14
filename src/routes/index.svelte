@@ -1,41 +1,42 @@
 <script lang="ts">
-    import { Pokerow, type IPokemon } from "$lib";
+    import type { IPokemon } from "$lib";
+    import { Pokerow } from "$lib";
+
+    // import PokemonStore from "src/stores/PokemonStore";
     import { onMount } from "svelte";
 
-    const numPokemon : number = 9
-    let Pokedex : Array<IPokemon> = new Array(numPokemon);
-    let data = new Array<string>(10);
-    let done : boolean = false;
-    onMount(() => {
-        loadPokedex().then(response => {
-            done = true;
-            console.log(Pokedex)
+    let Pokedex: IPokemon[];
+    onMount(async () => {
+        const numPokemon : number = 151
+        let promises : Promise<IPokemon>[] = [...Array(numPokemon).keys()].map(async (pkmn, id) => {
+            const pokemon = fetchPokemon(id + 1);
+            return pokemon;
         });
-    });
+        Pokedex = await Promise.all(promises);
+    })
 
-    async function loadPokedex(): Promise<any> {
-        for (let id = 1; id <= Pokedex.length; id++) {
-            Pokedex[id - 1] = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-                .then(response => response.json())
-                .then(data => {
-                    let stats : string[] = new Array<string>(6);
-                    for (let i = 0; i < stats.length; i++) {
-                        stats[i] = data["stats"][i]["base_stat"].toString();
-                    }
-                    let types : string = (data["types"].length == 1) ? 
-                        data["types"][0]["type"]["name"] : `${data["types"][0]["type"]["name"]}|${data["types"][1]["type"]["name"]}`;
-                    let Pokemon: IPokemon = {
-                        DexNum: id.toString(),
-                        Name:   data["name"],
-                        Sprite: data["sprites"]["front_default"],
-                        Types:  types,
-                        Stats:  stats
-                    }
-                    return Pokemon;
-                });
-            console.log(Pokedex[id])
-        }
-        return;
+
+    function fetchPokemon(id: number): Promise<IPokemon> {
+        return fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                let stats : string[] = new Array<string>(6);
+                for (let i = 0; i < 6; i++) {
+                    stats[i] = data["stats"][i]["base_stat"].toString();
+                }
+                let types : string = (data["types"].length == 1) ? 
+                    data["types"][0]["type"]["name"] : `${data["types"][0]["type"]["name"]}|${data["types"][1]["type"]["name"]}`;
+                let Pokemon: IPokemon = {
+                    DexNum: id.toString(),
+                    Name:   data["name"],
+                    Sprite: data["sprites"]["front_default"],
+                    Types:  types,
+                    Stats:  stats
+                }
+                return Pokemon;
+            });
     }
 </script>
 
@@ -52,10 +53,10 @@
         <div id="SpDef" class="col">SpDef</div>
         <div id="Speed" class="col">Speed</div>
     </div>
-    {#if done}
-        {#each Pokedex as pokemon}
-            <Pokerow data={pokemon}/>
-        {/each}
+    {#if Pokedex}
+    {#each Pokedex as pokemon}
+        <Pokerow data={pokemon}></Pokerow>
+    {/each}
     {/if}
 </div>
 
