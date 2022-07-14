@@ -1,25 +1,32 @@
 <script context="module" lang="ts">
     // @ts-ignore
     export async function load({ params, fetch }) {
-        const url = `https://pokeapi.co/api/v2/pokemon/${params.pkmn}`;
-        const response = await fetch(url);
+        const pkmnDataResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.pkmn}`);
+        const pkmnEvolutionResponse = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${params.pkmn}`);
 
         return {
-            status: response.status,
+            status: pkmnDataResponse.status,
             props: {
-                data: response.ok && (await response.json())
+                pkmnData: pkmnDataResponse.ok && (await pkmnDataResponse.json()),
+                pkmnEvoChain: pkmnEvolutionResponse.ok && (await pkmnEvolutionResponse.json())
             }
         };
     }
 </script>
 
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { PokemonPage } from "$lib";
+    import { fly } from 'svelte/transition'
 
-    export let data : any;
+    export let pkmnData : any;
+    export let pkmnEvoChain : any;
 </script>
 
-{data.name}
+
+<div in:fly={{ x:-300, duration: 1000 }}>
+    <PokemonPage data={pkmnData} evoChain={pkmnEvoChain}/>
+</div>
+
 
 <style>
 

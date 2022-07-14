@@ -28,7 +28,7 @@ import { goto } from '$app/navigation';
         {/if}
     </div>
     {#each data.Stats as stat, i}
-    <div class="col" id={`type-${i}`}>
+    <div class="col" id={`stat-${i}`}>
         <p>{stat}</p>
     </div>
     {/each}
