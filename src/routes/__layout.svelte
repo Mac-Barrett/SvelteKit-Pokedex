@@ -18,6 +18,10 @@
         min-height: calc(100vh - 15em); /* 100vh - (height of Header.svelte + height of Footer.svelte) [10em + 5em = 15em] */
     }
 
+    :global(p.small-text) {
+        font-size: .5em;
+    }
+
     :global(#type-0) {
         background-color: rgba(255, 0, 0, 0.25);
     }

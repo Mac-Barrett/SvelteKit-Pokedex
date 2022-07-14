@@ -1,8 +1,12 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
+
     import type { IPokemon } from '$lib';
 
     export var data : IPokemon;
-    const WIKI_PATH = "https://bulbapedia.bulbagarden.net/wiki/";
+    async function goToPokemon () {
+        goto((await fetch(`./pokemon/${data.DexNum}`)).url);
+    }
 </script>
 
 <div class="row">
@@ -10,7 +14,7 @@
         <p>{data.DexNum}</p>
     </div>
     <div class="col">
-        <p><a href={WIKI_PATH} target="_blank">{data.Name}</a></p>
+        <p><a href={`./pokemon/${data.DexNum}`}>{data.Name}</a></p>
     </div>
     <div class="col">
         <img src={data.Sprite} alt={data.Name}>

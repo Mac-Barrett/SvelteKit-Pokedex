@@ -7,18 +7,18 @@
 </div>
 <div class="contianer-fluid bg">
     <div class="row" style="max-width: 100%;">
-        <button class="btn col-sm mx-5">Hi</button>
-        <button class="btn col-sm mx-5">Hello</button>
-        <button class="btn col-sm mx-5">Wazzup</button>
+        <a href="/pokedex" class="btn col-sm mx-5" sveltekit:prefetch>Pokedex</a>
+        <a href="/movedex" class="btn col-sm mx-5" sveltekit:prefetch>Move List</a>
+        <a href="/other??" class="btn col-sm mx-5" sveltekit:prefetch>Other</a>
     </div>
 </div>
 
 <style>
-    button {
+    a {
         height: 100%;
         color:slategray;
     }
-    button:hover {
+    a:hover {
         border: 2px solid slategray;
     }
 
