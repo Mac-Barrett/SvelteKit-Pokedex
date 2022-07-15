@@ -8,7 +8,7 @@
     let Pokedex: IPokemon[];
     onMount(async () => {
         const numPokemon : number = 151
-        let promises : Promise<IPokemon>[] = [...Array(numPokemon).keys()].map(async (pkmn, id) => {
+        let promises : Promise<IPokemon>[] = [...Array(numPokemon).keys()].map(async (_pkmn, id) => {
             const pokemon = fetchPokemon(id + 1);
             return pokemon;
         });

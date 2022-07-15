@@ -4,9 +4,6 @@ import { goto } from '$app/navigation';
     import type { IPokemon } from '$lib';
 
     export var data : IPokemon;
-    async function goToPokemon () {
-        goto((await fetch(`./pokemon/${data.DexNum}`)).url);
-    }
 </script>
 
 <div class="row">
@@ -28,7 +25,7 @@ import { goto } from '$app/navigation';
         {/if}
     </div>
     {#each data.Stats as stat, i}
-    <div class="col" id={`stat-${i}`}>
+    <div class={`col stat-${i}`}>
         <p>{stat}</p>
     </div>
     {/each}

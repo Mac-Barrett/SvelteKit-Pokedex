@@ -8,7 +8,7 @@
             status: pkmnDataResponse.status,
             props: {
                 pkmnData: pkmnDataResponse.ok && (await pkmnDataResponse.json()),
-                pkmnEvoChain: pkmnEvolutionResponse.ok && (await pkmnEvolutionResponse.json())
+                pkmnEvoChain: pkmnEvolutionResponse.ok && (await pkmnEvolutionResponse.json()),
             }
         };
     }
@@ -16,17 +16,21 @@
 
 <script lang="ts">
     import { PokemonPage } from "$lib";
+    import { PageTransitions } from "$lib";
     import { fly } from 'svelte/transition'
 
     export let pkmnData : any;
     export let pkmnEvoChain : any;
+
+    let slideX : number = 0;
+
 </script>
 
-
-<div in:fly={{ x:-300, duration: 1000 }}>
-    <PokemonPage data={pkmnData} evoChain={pkmnEvoChain}/>
-</div>
-
+<PageTransitions refresh={pkmnData && pkmnEvoChain}>
+    <div in:fly={{ x: -slideX, duration: 250, delay: 250 }} out:fly={{ x: slideX, duration: 250, delay: 0 }}>
+        <PokemonPage on:setSlideX={(event) => {slideX = event.detail.slideX}} data={pkmnData} evoChain={pkmnEvoChain}/>
+    </div>
+</PageTransitions>
 
 <style>
 
