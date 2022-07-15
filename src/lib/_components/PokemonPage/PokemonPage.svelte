@@ -4,7 +4,6 @@
     const dispatch = createEventDispatcher();
 
     import { TypeColors } from "$lib";
-    import { fly } from 'svelte/transition';
     import StatsBlock from "./StatsBlock.svelte";
 
     export var data : any;
@@ -19,7 +18,7 @@
         type2 = (data.types.length > 1) ? data.types[1].type.name : type1;
         stats = getStats();
 
-        console.log(data, evoChain);
+        console.log(data);
     }
 
     function getStats() {

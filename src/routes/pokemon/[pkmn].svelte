@@ -23,7 +23,6 @@
     export let pkmnEvoChain : any;
 
     let slideX : number = 0;
-
 </script>
 
 <PageTransitions refresh={pkmnData && pkmnEvoChain}>

@@ -1,6 +1,4 @@
 <script lang="ts">
-import { goto } from '$app/navigation';
-
     import type { IPokemon } from '$lib';
 
     export var data : IPokemon;

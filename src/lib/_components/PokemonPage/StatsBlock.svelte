@@ -21,7 +21,6 @@
         statsObj.bst = calcBST();
         statsObj.at50 = calcAllStats(50);
         statsObj.at100 = calcAllStats(100);
-        console.log(statsObj);
     }
 
     function calcBST() {
