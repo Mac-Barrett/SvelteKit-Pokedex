@@ -50,7 +50,7 @@
     <div id="pkmnNavBar" class="row mx-2 mt-4 py-3">
         <div class="col">
             {#if data.id != 1}
-            <button id="prev" on:click={onTopNavigate}>Previous</button>
+            <button id="prev" class="btn btn-outline-secondary" on:click={onTopNavigate}>Previous</button>
             {/if}
         </div>
         <div class="col">
@@ -58,7 +58,7 @@
         </div>
         <div class="col">
             {#if data.id != totalPkmn}
-            <button id="next" on:click={onTopNavigate}>Next</button>
+            <button id="next" class="btn btn-outline-secondary" on:click={onTopNavigate}>Next</button>
             {/if}
         </div>
     </div>
