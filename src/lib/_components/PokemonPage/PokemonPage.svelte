@@ -4,27 +4,42 @@
     const dispatch = createEventDispatcher();
 
     import { TypeColors } from "$lib";
+    import TypeEffectivenessBlock from "./TypeEffectivenessBlock.svelte";
     import StatsBlock from "./StatsBlock.svelte";
+    import GeneralInfoBlock from "./GeneralInfoBlock.svelte";
+
 
     export var data : any;
     export var evoChain : any;
 
     const totalPkmn : number = 151;
     let type1 : string;
-    let type2 : string;
+    let type2 : string|null;
     let stats : number[] = Array(6);
+
+    let infoBlockProps : any;
     $: {
         type1 = (data.types[0].type.name);
-        type2 = (data.types.length > 1) ? data.types[1].type.name : type1;
-        stats = getStats();
+        type2 = (data.types.length > 1) ? data.types[1].type.name : null;
+        stats = getStats("base_stat");
 
+        infoBlockProps = getInfoBlockProps();
         console.log(data);
     }
 
-    function getStats() {
+    function getInfoBlockProps() {
+        return {
+            img: data.sprites.other["official-artwork"].front_default,
+            name: data.name,
+            evoChain: evoChain,
+            evs: getStats("effort"),
+        }
+    }
+
+    function getStats(statType: string) {
         let newStats : number[] = Array(6);
         for (let i = 0; i < 6; i++) {
-            newStats[i] = data.stats[i].base_stat;
+            newStats[i] = data.stats[i][statType]; // statType being either "base_stat" or "effort"
         }
         return newStats;
     }
@@ -63,12 +78,15 @@
         </div>
     </div>
 
+    <div class="row mx-1 mt-4 py-3">
+        <div class="col p-0">
+            <GeneralInfoBlock {...infoBlockProps}/>
+            <StatsBlock stats={stats}/>
+        </div>
+    </div>
     <div class="row mx-2 mt-4 py-3">
         <div class="col p-0">
-            <img src={data.sprites.other["official-artwork"].front_default} alt={data.name}>
-        </div>
-        <div class="col p-0">
-            <StatsBlock stats={stats}/>
+            <TypeEffectivenessBlock type1={type1} type2={type2}/>
         </div>
     </div>
 </div>
@@ -92,9 +110,5 @@
         text-align: center;
     }
 
-    img {
-        border: 2px solid black;
-        border-radius: 5px;
-        background-color: white;
-    }
+
 </style>

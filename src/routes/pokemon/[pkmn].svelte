@@ -1,7 +1,9 @@
 <script context="module" lang="ts">
     // @ts-ignore
     export async function load({ params, fetch }) {
-        const pkmnDataResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.pkmn}`);
+        let pokemonName : number|string = params.pkmn;
+
+        const pkmnDataResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${params.pkmn}`);
         const pkmnEvolutionResponse = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${params.pkmn}`);
 
         return {

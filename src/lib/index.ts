@@ -4,7 +4,7 @@ import Pokerow from "./_components/Pokerow.svelte";
 import PageTransitions from "./_components/PageTransitions.svelte";
 
 import PokemonPage from "./_components/PokemonPage/PokemonPage.svelte";
-import MoveRow from "./_components/PokemonPage/MoveRow.svelte";
+import MoveRow from "./_components/MoveRow.svelte";
 import TypeEffectivenessBlock from "./_components/PokemonPage/TypeEffectivenessBlock.svelte"
 
 export {

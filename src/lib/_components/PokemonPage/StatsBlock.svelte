@@ -58,7 +58,7 @@
     }
 </script>
 
-<table class="p-3">
+<table>
     <tr>
         <th style="text-align: center;" colspan="2" rowspan="2">Stats</th>
         <th style="text-align: center;" colspan="2" rowspan="1">Range</th>
@@ -71,10 +71,10 @@
     <tr class="stat-{i}">
         <th class="stat-{i}">
             <div style="float: left;">{statNames[i]}:</div>
-            <small style="float:right;" class="pt-1 pl-2">{stat}</small>
+            <div style="float:right;" class="pl-2">{stat}</div>
         </th>
         <td class="stat-{i} stat-bar-container">
-            <div class="stat-{i} stat-bar" style="width: calc({(stat / 255)} * 200px);"></div>
+            <div class="stat-{i} stat-bar" style="width: calc({(stat / 255)} * 100px);"></div>
         </td>
         <td class="stat-{i}">
             <small>{statsObj.at50.min[i]} - {statsObj.at50.max[i]}</small>
@@ -92,8 +92,6 @@
 <style>
     table {
         background-color: white;
-
-        border: 2px solid black;
         border-radius: 20px;
         margin: 0;
     }
@@ -104,6 +102,7 @@
 
     th {
         border: 1px solid black;
+        font-size: .75em;
     }
 
     td {
@@ -112,12 +111,12 @@
     }
 
     small {
-        font-size: .66em;
+        font-size: .6em;
         font-weight: 700;
     }
 
     .stat-bar-container {
-        min-width: 200px;
+        min-width: 100px;
     }
 
     .stat-bar {
