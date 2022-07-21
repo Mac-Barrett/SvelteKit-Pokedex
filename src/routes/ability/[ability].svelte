@@ -1,20 +1,20 @@
 <script context="module" lang="ts">
     // @ts-ignore
     export async function load({ params, fetch }) {
-        const res = await fetch(`https://pokeapi.co/api/v2/move/${params.move}`);
+        const res = await fetch(`https://pokeapi.co/api/v2/ability/${params.ability}`);
 
         return {
             status: res.status,
             props: {
-                move: res.ok && (await res.json()),
+                ability: res.ok && (await res.json()),
             }
         };
     }
 </script>
 
 <script lang="ts">
-    export var move : any;
-    console.log(move);
+    export var ability : any;
+    console.log(ability);
 </script>
 
 

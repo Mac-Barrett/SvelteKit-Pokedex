@@ -8,10 +8,16 @@
 </head>
 
 <Header/>
-<slot/>
+<div>
+    <slot/>
+</div>
 <Footer/>
 
 <style>
+    div {
+        min-height: calc(100vh - 16em);
+    }
+
     :global(p.small-text) {
         font-size: .5em;
     }
