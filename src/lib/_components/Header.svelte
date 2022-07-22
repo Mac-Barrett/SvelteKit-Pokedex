@@ -3,8 +3,10 @@
 </script>
 
 <div class="header">
-    <div class="container-fluid bg" style="border-bottom: 1px solid slategray;">
-        <h1 class="py-2">SvelteDex</h1>
+    <div class="container-fluid bg top">
+        <a href="/" sveltekit:prefetch>
+            <h1 class="py-2">SvelteDex</h1>
+        </a>
     </div>
     <div class="contianer-fluid bg">
         <div class="row m-0">
@@ -25,7 +27,10 @@
         color:slategray;
     }
     a:hover {
+        color: slategray;
         border: 2px solid slategray;
+        opacity: .8;
+        text-decoration: none;
     }
 
     h1 {
@@ -35,7 +40,14 @@
     }
 
     .bg {
-        min-height: 4em;
+        min-height: calc(4em - 1px);
         background-color: black;
+    }
+
+    .top {
+        min-width: 300px;
+        max-width: 75%;
+        border-bottom: 2px solid slategray;
+        border-radius: 30px;
     }
 </style>
