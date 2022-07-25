@@ -13,25 +13,28 @@
 </script>
 
 <script lang="ts">
-    import { MoveRow } from "$lib";
+    import { MoveRow, type IMove } from "$lib";
     import { TypeColors } from "$lib";
 
     export var move : any;
-    console.log(move);
 
-    let props : any = {
-        name : move.name,
-        type : move.type.name,
-        damageClass : move.damage_class.name,
-        power : move.power,
-        accuracy : move.accuracy,
-        description : move.flavor_text_entries[0].flavor_text
+    let props : IMove;
+    $: {
+        props = {
+            ID: "",
+            Name: move.name,
+            Type: move.type.name,
+            DamageClass: move.damage_class.name,
+            Power: move.power,
+            Accuracy: move.accuracy,
+            Description: move.flavor_text_entries[0].flavor_text,
+        }
     }
 </script>
 
 <div class="container my-5 p-5" style="--type: {TypeColors[move.type.name]}">
     <table>
-        <MoveRow {...props}/>
+        <MoveRow data={props}/>
     </table>
 </div>
     

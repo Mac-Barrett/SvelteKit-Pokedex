@@ -1,19 +1,17 @@
 <script lang="ts">
-    export var name : string;
-    export var type : string;
-    export var damageClass : string;
-    export var power : string;
-    export var accuracy : string;
-    export var description : string;
+    import type { IMove } from "$lib";
+
+    export var data : IMove;
+    console.log(data);
 </script>
 
 <tr>
-    <td>{name}</td>
-    <td><img src={`/res/${type}.png`} alt={type}></td>
-    <td>{damageClass}</td>
-    <td>{power}</td>
-    <td>{accuracy}</td>
-    <td colspan="2">{description}</td>
+    <td>{data.Name}</td>
+    <td><img src={`/res/${data.Type}.png`} alt={data.Type}></td>
+    <td>{data.DamageClass}</td>
+    <td>{data.Power}</td>
+    <td>{data.Accuracy}</td>
+    <td colspan="2">{data.Description}</td>
 </tr>
 
 <style>

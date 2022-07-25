@@ -1,40 +1,7 @@
 <script lang="ts">
-    import type { IPokemon } from "$lib";
-    import { Pokerow } from "$lib";
+import GridList, { ListType } from "$lib/_components/GridList.svelte";
 
-    // import PokemonStore from "src/stores/PokemonStore";
-    import { onMount } from "svelte";
 
-    let Pokedex: IPokemon[];
-    onMount(async () => {
-        const numPokemon : number = 151
-        let promises : Promise<IPokemon>[] = [...Array(numPokemon).keys()].map(async (_pkmn, id) => {
-            const pokemon = fetchPokemon(id + 1);
-            return pokemon;
-        });
-        Pokedex = await Promise.all(promises);
-    })
-
-    function fetchPokemon(id: number): Promise<IPokemon> {
-        return fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-            .then(response => response.json())
-            .then(data => {
-                let stats : string[] = new Array<string>(6);
-                for (let i = 0; i < 6; i++) {
-                    stats[i] = data["stats"][i]["base_stat"].toString();
-                }
-                let types : string = (data["types"].length == 1) ? 
-                    data["types"][0]["type"]["name"] : `${data["types"][0]["type"]["name"]}|${data["types"][1]["type"]["name"]}`;
-                let Pokemon: IPokemon = {
-                    DexNum: id.toString(),
-                    Name:   data["name"],
-                    Sprite: data["sprites"]["front_default"],
-                    Types:  types,
-                    Stats:  stats
-                }
-                return Pokemon;
-            });
-    }
 </script>
 
 <div class="container my-5">
@@ -50,11 +17,7 @@
         <div id="SpDef" class="col">SpDef</div>
         <div id="Speed" class="col">Speed</div>
     </div>
-    {#if Pokedex}
-    {#each Pokedex as pokemon}
-        <Pokerow data={pokemon}></Pokerow>
-    {/each}
-    {/if}
+    <GridList listType={ListType.PKMN_LIST} IDs={[...Array(151).keys()]}/>
 </div>
 
 <style>

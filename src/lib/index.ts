@@ -1,20 +1,22 @@
 import Header from "./_components/Header.svelte";
 import Footer from "./_components/Footer.svelte";
 import Pokerow from "./_components/Pokerow.svelte";
+import MoveRow from "./_components/MoveRow.svelte";
+import GridList from "./_components/GridList.svelte";
 import PageTransitions from "./_components/PageTransitions.svelte";
 
 import PokemonPage from "./_components/PokemonPage/PokemonPage.svelte";
-import MoveRow from "./_components/GridRow.svelte";
 import TypeEffectivenessBlock from "./_components/PokemonPage/TypeEffectivenessBlock.svelte"
 
 export {
     Header,
     Footer,
     Pokerow,
+    MoveRow,
+    GridList,
     PageTransitions,
 
     PokemonPage,
-    MoveRow,
     TypeEffectivenessBlock
 };
 
@@ -24,6 +26,16 @@ export interface IPokemon {
     Sprite: string,
     Types:  string,
     Stats: Array<string>;
+}
+
+export interface IMove {
+    ID: string,
+    Name: string,
+    Type: string,
+    DamageClass: string,
+    Power: string,
+    Accuracy: string,
+    Description: string
 }
 
 export const TypeColors: any = {

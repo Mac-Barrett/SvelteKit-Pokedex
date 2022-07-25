@@ -89,6 +89,11 @@
             <TypeEffectivenessBlock type1={type1} type2={type2}/>
         </div>
     </div>
+    <div class="row">
+        <table>
+            
+        </table>
+    </div>
 </div>
 
 <style>
