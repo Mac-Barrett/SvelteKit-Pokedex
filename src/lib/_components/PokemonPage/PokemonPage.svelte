@@ -3,11 +3,11 @@
     import { createEventDispatcher } from "svelte/internal";
     const dispatch = createEventDispatcher();
 
-    import { TypeColors } from "$lib";
+    import { MoveRow, TypeColors, type IMove } from "$lib";
     import TypeEffectivenessBlock from "./TypeEffectivenessBlock.svelte";
     import StatsBlock from "./StatsBlock.svelte";
     import GeneralInfoBlock from "./GeneralInfoBlock.svelte";
-
+import { ListType } from "../GridList.svelte";
 
     export var data : any;
     export var evoChain : any;
@@ -18,13 +18,14 @@
     let stats : number[] = Array(6);
 
     let infoBlockProps : any;
+    let moveList: Promise<IMove[]>;
     $: {
         type1 = (data.types[0].type.name);
         type2 = (data.types.length > 1) ? data.types[1].type.name : null;
         stats = getStats("base_stat");
 
         infoBlockProps = getInfoBlockProps();
-        console.log(data);
+        moveList = getMoves();
     }
 
     function getInfoBlockProps() {
@@ -42,6 +43,29 @@
             newStats[i] = data.stats[i][statType]; // statType being either "base_stat" or "effort"
         }
         return newStats;
+    }
+
+    async function getMoves() {
+        let promises: Promise<IMove>[] = Object.keys(data.moves).map(async (move) => {
+            const newMove = fetchMove(data.moves[move].move.url);
+            return newMove;
+        });
+        return await Promise.all(promises);
+
+        async function fetchMove(url: string) {
+            const response = await fetch(url);
+            const json = await response.json();
+            let Move: IMove = {
+                ID: json.id,
+                Name: json.name,
+                Type: json.type.name,
+                DamageClass: json.damage_class.name,
+                Power: json.power,
+                Accuracy: json.Accuracy,
+                Description: json.flavor_text_entries[0].flavor_text
+            };
+            return Move;
+        }
     }
 
     function onTopNavigate(event: Event) {
@@ -89,9 +113,15 @@
             <TypeEffectivenessBlock type1={type1} type2={type2}/>
         </div>
     </div>
-    <div class="row">
+    <div class="row mx-2 mt-4 py-3">
         <table>
-            
+            {#await moveList}
+                Loading UwU
+            {:then moveList} 
+                {#each moveList as move}
+                    <MoveRow data={move}/>
+                {/each}
+            {/await}
         </table>
     </div>
 </div>
@@ -115,5 +145,7 @@
         text-align: center;
     }
 
-
+    table {
+        background-color: white;
+    }
 </style>

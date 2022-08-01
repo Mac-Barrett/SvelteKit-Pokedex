@@ -38,6 +38,12 @@ export interface IMove {
     Description: string
 }
 
+export interface IAbility {
+    ID: string,
+    Name: string,
+    Description: string
+}
+
 export const TypeColors: any = {
     "bug"       : "#a8b820",
     "dark"      : "#705848",

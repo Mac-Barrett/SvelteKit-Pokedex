@@ -18,7 +18,6 @@
             let type1effectiveness: number = TypeEffectiveness[attackingType][type1];
             let type2effectiveness: number = (type2 === null) ? 1 : TypeEffectiveness[attackingType][type2];
             let totalTypeEffectiveness: number = type1effectiveness * type2effectiveness;
-            console.log(totalTypeEffectiveness);
 
             switch (totalTypeEffectiveness) {
                 case 4:

@@ -14,7 +14,6 @@
 
 <script lang="ts">
     export var ability : any;
-    console.log(ability);
 </script>
 
 

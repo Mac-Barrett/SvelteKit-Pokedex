@@ -21,7 +21,7 @@
     let props : IMove;
     $: {
         props = {
-            ID: "",
+            ID: move.id,
             Name: move.name,
             Type: move.type.name,
             DamageClass: move.damage_class.name,

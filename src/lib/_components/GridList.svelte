@@ -1,12 +1,13 @@
 <script lang="ts" context="module">
     export enum ListType {
         MOVE_LIST,
-        PKMN_LIST
+        PKMN_LIST,
+        ABLT_LIST
     }
 </script>
 
 <script lang="ts">
-    import { Pokerow, MoveRow, type IMove, type IPokemon } from "$lib";
+    import { Pokerow, MoveRow, type IMove, type IPokemon, type IAbility} from "$lib";
     import { onMount } from "svelte";
 
     export var listType: ListType;
@@ -14,6 +15,7 @@
 
     let moveList : Array<IMove>;
     let pkmnList : Array<IPokemon>;
+    let abltList : Array<IAbility>;
     
 
     onMount(async () => {

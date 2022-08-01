@@ -5,7 +5,6 @@
     export var evs: any;
 
     $: {
-        console.log(evoChain)
     }
 </script>
 

@@ -2,11 +2,10 @@
     import type { IMove } from "$lib";
 
     export var data : IMove;
-    console.log(data);
 </script>
 
 <tr>
-    <td>{data.Name}</td>
+    <td><a href={`/move/${data.ID}`}>{data.Name}</a></td>
     <td><img src={`/res/${data.Type}.png`} alt={data.Type}></td>
     <td>{data.DamageClass}</td>
     <td>{data.Power}</td>
