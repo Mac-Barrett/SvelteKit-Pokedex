@@ -1,5 +1,37 @@
 <script lang="ts">
-    import GridList, { ListType } from "$lib/_components/GridList.svelte";
+    import { Pokerow, type IPokemon } from "$lib";
+
+    import { onMount } from "svelte";
+
+    let pkmnList : IPokemon[]|null = null;
+    onMount(async () => {
+        let promises : Promise<IPokemon>[] = [...Array(151).keys()].map(async (id) => {
+                const pokemon = fetchPokemon(id + 1);
+                return pokemon;
+        });
+        pkmnList = await Promise.all(promises);
+    });
+    
+    async function fetchPokemon(id: number): Promise<IPokemon> {
+        const response=await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        const data=await response.json();
+        let stats: string[]=new Array<string>(6);
+        for(let i=0;i<6;i++) {
+            stats[i] = data.stats[i].base_stat.toString();
+        }
+
+        let types: string=(data.types.length==1) ?
+        data.types[0].type.name : `${data.types[0].type.name}|${data.types[1].type.name}`;
+
+        let Pokemon: IPokemon={
+            DexNum: id.toString(),
+            Name: data.name,
+            Sprite: data.sprites.front_default,
+            Types: types,
+            Stats: stats
+        };
+        return Pokemon;
+    }
 </script>
 
 <div class="container my-5 p-5">
@@ -16,7 +48,11 @@
             <th id="SpDef">SpDef</th>
             <th id="Speed">Speed</th>
         </tr>
-        <GridList listType={ListType.PKMN_LIST} IDs={[...Array(151).keys()]}/>
+        {#if pkmnList != null}
+            {#each pkmnList as pkmn}
+                <Pokerow data={pkmn}/>    
+            {/each}
+        {/if}
     </table>
 </div>
 
