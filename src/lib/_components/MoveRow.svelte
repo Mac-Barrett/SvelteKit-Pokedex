@@ -2,6 +2,7 @@
     import type { IMove } from "$lib";
 
     export var data : IMove;
+    export let showDesc: boolean = true;
 </script>
 
 <tr>
@@ -10,7 +11,9 @@
     <td>{data.DamageClass}</td>
     <td>{data.Power}</td>
     <td>{data.Accuracy}</td>
+    {#if showDesc}
     <td colspan="2">{data.Description}</td>
+    {/if}
 </tr>
 
 <style>

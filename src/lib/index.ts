@@ -2,7 +2,6 @@ import Header from "./_components/Header.svelte";
 import Footer from "./_components/Footer.svelte";
 import Pokerow from "./_components/Pokerow.svelte";
 import MoveRow from "./_components/MoveRow.svelte";
-import GridList from "./_components/GridList.svelte";
 import PageTransitions from "./_components/PageTransitions.svelte";
 
 import PokemonPage from "./_components/PokemonPage/PokemonPage.svelte";
@@ -13,7 +12,6 @@ export {
     Footer,
     Pokerow,
     MoveRow,
-    GridList,
     PageTransitions,
 
     PokemonPage,

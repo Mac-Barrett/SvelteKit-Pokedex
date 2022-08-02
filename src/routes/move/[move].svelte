@@ -29,6 +29,7 @@
             Accuracy: move.accuracy,
             Description: move.flavor_text_entries[0].flavor_text,
         }
+        console.log(move);
     }
 </script>
 

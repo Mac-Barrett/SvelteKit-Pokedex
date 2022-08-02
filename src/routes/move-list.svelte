@@ -6,16 +6,17 @@
     let moveList: IMove[]|null = null;
     onMount(async () => {
         let promises : Promise<IMove>[] = [...Array(50).keys()].map(async (id) => {
-        const move = fetchMove(id + 1);
+            const move = fetchMove(id + 1);
             return move;
-            });
+        });
         moveList = await Promise.all(promises);
     });
 
     async function fetchMove(id: number): Promise<IMove> {
         const response = await fetch(`https://pokeapi.co/api/v2/move/${id}/`);
         const data = await response.json();
-        let Move: IMove={
+
+        return {
             ID: id.toString(),
             Name: data.name,
             Type: data.type.name,
@@ -24,7 +25,6 @@
             Accuracy: data.Accuracy,
             Description: data.flavor_text_entries[0].flavor_text
         };
-        return Move;
     }
 </script>
 
