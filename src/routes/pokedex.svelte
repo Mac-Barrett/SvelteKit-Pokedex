@@ -58,14 +58,16 @@
 
 <style>
     .container {
-        background-color: darkslateblue;
+        background-color: lightgray;
         border-radius: 20px;
         border: 2px solid black;
     }
+
     table {
-        background-color: white;
         width: 100%;
+        background-color: white;
     }
+    
     th {
         text-align: center;
         background-color: white;

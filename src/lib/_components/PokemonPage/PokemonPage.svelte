@@ -7,18 +7,18 @@
     import TypeEffectivenessBlock from "./TypeEffectivenessBlock.svelte";
     import StatsBlock from "./StatsBlock.svelte";
     import GeneralInfoBlock from "./GeneralInfoBlock.svelte";
-import { ListType } from "../GridList.svelte";
 
     export var data : any;
     export var evoChain : any;
 
     const totalPkmn : number = 151;
-    let type1 : string;
-    let type2 : string|null;
-    let stats : number[] = Array(6);
+    let type1: string;
+    let type2: string|null;
+    let stats: number[] = Array(6);
 
-    let infoBlockProps : any;
+    let infoBlockProps: any;
     let moveList: Promise<IMove[]>;
+
     $: {
         type1 = (data.types[0].type.name);
         type2 = (data.types.length > 1) ? data.types[1].type.name : null;
@@ -46,16 +46,16 @@ import { ListType } from "../GridList.svelte";
     }
 
     async function getMoves() {
-        let promises: Promise<IMove>[] = Object.keys(data.moves).map(async (move) => {
-            const newMove = fetchMove(data.moves[move].move.url);
-            return newMove;
+        let promises: Promise<IMove>[] = Object.keys(data.moves).map(async (index) => {
+            return fetchMove(data.moves[index].move.url);
         });
         return await Promise.all(promises);
 
         async function fetchMove(url: string) {
             const response = await fetch(url);
             const json = await response.json();
-            let Move: IMove = {
+
+            return {
                 ID: json.id,
                 Name: json.name,
                 Type: json.type.name,
@@ -63,8 +63,7 @@ import { ListType } from "../GridList.svelte";
                 Power: json.power,
                 Accuracy: json.Accuracy,
                 Description: json.flavor_text_entries[0].flavor_text
-            };
-            return Move;
+            }
         }
     }
 
@@ -102,17 +101,22 @@ import { ListType } from "../GridList.svelte";
         </div>
     </div>
 
+    <!-- Row 1 -->
     <div class="row mx-1 mt-4 py-3">
         <div class="col p-0">
             <GeneralInfoBlock {...infoBlockProps}/>
             <StatsBlock stats={stats}/>
         </div>
     </div>
+    
+    <!-- Row 2 -->
     <div class="row mx-2 mt-4 py-3">
         <div class="col p-0">
             <TypeEffectivenessBlock type1={type1} type2={type2}/>
         </div>
     </div>
+
+    <!-- Row 3 -->
     <div class="row mx-2 mt-4 py-3">
         <table>
             {#await moveList}

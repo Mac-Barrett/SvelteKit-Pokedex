@@ -28,14 +28,25 @@
     }
 </script>
 
-<table> 
-    {#if moveList != null}
-        {#each moveList as move}
-            <MoveRow data={move}/>
-        {/each}
-    {/if}
-</table>
+<div class="container my-5 p-5">
+    <table> 
+        {#if moveList != null}
+            {#each moveList as move}
+                <MoveRow data={move}/>
+            {/each}
+        {/if}
+    </table>
+</div>
 
 <style>
+    .container {
+        background-color: lightgray;
+        border-radius: 20px;
+        border: 2px solid black;
+    }
 
+    table {
+        width: 100%;
+        background-color: white;
+    }
 </style>
