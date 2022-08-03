@@ -19,7 +19,7 @@
 
 <style>
     .header {
-        max-height: 8em;
+        max-height: fit-content;
         background-color: black;
     }
     a {
@@ -40,7 +40,7 @@
     }
 
     .bg {
-        min-height: calc(4em - 1px);
+        min-height: calc(4em - 2px);
         background-color: black;
     }
 

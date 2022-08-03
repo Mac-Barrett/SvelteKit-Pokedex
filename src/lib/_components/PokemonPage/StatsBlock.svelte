@@ -1,5 +1,6 @@
 <script lang="ts">
     export var stats : number[];
+    
     const statNames : Record<number, string> = {
         0: "HP",
         1: "ATK",
