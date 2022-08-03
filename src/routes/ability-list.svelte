@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { IAbility } from "$lib";
-import AbilityRow from "$lib/_components/AbilityRow.svelte";
+    import AbilityRow from "$lib/_components/AbilityRow.svelte";
 
     
     import { onMount } from "svelte";
