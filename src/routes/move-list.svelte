@@ -1,5 +1,6 @@
 <script lang="ts">
     import { MoveRow, type IMove } from "$lib";
+    import { Stretch } from "svelte-loading-spinners";
 
     import { onMount } from "svelte";
 
@@ -29,6 +30,10 @@
             {#each moveList as move}
                 <MoveRow data={move}/>
             {/each}
+        {:else}
+        <div style="background-color: lightgray; text-align:center;">
+            <Stretch color="black"></Stretch>
+        </div>
         {/if}
     </table>
 </div>

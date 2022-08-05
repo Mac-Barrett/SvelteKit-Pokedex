@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Pokerow, type IPokemon } from "$lib";
+    import { Stretch } from "svelte-loading-spinners";
 
     import { onMount } from "svelte";
 
@@ -30,6 +31,7 @@
 </script>
 
 <div class="container my-5 p-5">
+    {#if pkmnList != null}
     <table>
         <tr class="sticky-top">
             <th id="Dex">Dex No</th>
@@ -43,12 +45,15 @@
             <th id="SpDef">SpDef</th>
             <th id="Speed">Speed</th>
         </tr>
-        {#if pkmnList != null}
-            {#each pkmnList as pkmn}
-                <Pokerow data={pkmn}/>
-            {/each}
-        {/if}
+        {#each pkmnList as pkmn}
+            <Pokerow data={pkmn}/>
+        {/each}
     </table>
+    {:else}
+    <div style="background-color: lightgray; text-align:center;">
+        <Stretch color="black"></Stretch>
+    </div>
+    {/if}
 </div>
 
 <style>

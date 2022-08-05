@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { IAbility } from "$lib";
     import AbilityRow from "$lib/_components/AbilityRow.svelte";
+    import { Stretch } from "svelte-loading-spinners";
 
     
     import { onMount } from "svelte";
@@ -23,7 +24,9 @@
 
 <div class="container my-5 p-5">
     {#if abilityList === null}
-    Loading UwU
+    <div style="background-color: lightgray; text-align:center;">
+        <Stretch color="black"></Stretch>
+    </div>
     {:else}
     <table>
         {#each abilityList as ability}
