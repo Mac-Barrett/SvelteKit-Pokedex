@@ -15,7 +15,7 @@
 
 <style>
     div {
-        min-height: calc(100vh - 13em);
+        min-height: calc(100vh - 13em - 14px);
     }
 
     :global(p.small-text) {

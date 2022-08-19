@@ -19,9 +19,17 @@
 </div>
 
 <style>
+    .bg {
+        width: 100%;
+        min-height: 5em;
+        
+        background-color: black;
+    }
+
     .row {
         padding:0;
         margin:0;
+        width: 100%;
     }
 
     p {
@@ -30,10 +38,5 @@
     }
     p:last-child {
         text-align:right;
-    }
-    
-    .bg {
-        min-height: 5em;
-        background-color: black;
     }
 </style>

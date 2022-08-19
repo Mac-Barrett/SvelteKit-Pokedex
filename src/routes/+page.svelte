@@ -2,12 +2,13 @@
     
 </script>
 
-<div class="container my-5">
+<div class="container">
+    <hr>
     <h3>Welcome to SvelteDex</h3>
     <p>
         This is an interactive pokemon information repository that I built during downtime at work to get more familiar with Svelte, API's, and Web Development in general. This project was obviously built using the Svelte framework, but additional technologies I've leveraged include Bootstrap, TypeScript, and NodeJS. The information from each webpage on this site comes from <a href="https://pokeapi.co/">PokeAPI</a>, a quite powerful REST API, which means that the webpage itself can be fast and small.
     </p>
-    <br><br>
+    <hr>
     <h3>Features (v0):</h3>
     <ul>
         <li>A scrollable Pokedex list complete with stats, types, & abilites</li>
@@ -38,7 +39,7 @@
         font-weight: 700;
     }
     p, li {
-        font-size: .9em;
+        font-size: .8em;
         font-weight: 500;
     }
 </style>

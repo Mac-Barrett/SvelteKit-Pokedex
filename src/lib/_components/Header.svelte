@@ -11,8 +11,9 @@
     <div class="contianer-fluid bg">
         <div class="row m-0">
             <a href="/pokedex" class="btn col-sm mx-5 my-2" sveltekit:prefetch>Pokedex</a>
-            <a href="/move-list" class="btn col-sm mx-5 my-2" sveltekit:prefetch>Move List</a>
-            <a href="/ability-list" class="btn col-sm mx-5 my-2" sveltekit:prefetch>Ability List</a>
+            <a href="/types" class="btn col-sm mx-5 my-2" sveltekit:prefetch>Types</a>
+            <a href="/move-list" class="btn col-sm mx-5 my-2" sveltekit:prefetch>Moves</a>
+            <a href="/ability-list" class="btn col-sm mx-5 my-2" sveltekit:prefetch>Abilities</a>
         </div>
     </div>
 </div>
