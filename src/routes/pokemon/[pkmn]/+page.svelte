@@ -1,27 +1,21 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
-    import { createEventDispatcher } from "svelte/internal";
-    const dispatch = createEventDispatcher();
-
-    import { MoveRow, TypeColors, type IMove } from "$lib";
-    import TypeEffectivenessBlock from "./TypeEffectivenessBlock.svelte";
-    import StatsBlock from "./StatsBlock.svelte";
-    import GeneralInfoBlock from "./GeneralInfoBlock.svelte";
-
-    export var data : any;
-    export var evoChain : any;
+    import { MoveRow, TypeEffectivenessBlock, StatsBlock, GeneralInfoBlock, TypeColors, type IMove } from "$lib";
+    import type { PageData } from './$types';
+    
+    export let data: PageData;
+    $: ({ pkmnData, pkmnEvolution } = data);
 
     const totalPkmn : number = 151;
     let type1: string;
     let type2: string|null;
     let stats: number[] = Array(6);
-
+    
     let infoBlockProps: any;
     let moveList: Promise<IMove[]>;
 
     $: {
-        type1 = (data.types[0].type.name);
-        type2 = (data.types.length > 1) ? data.types[1].type.name : null;
+        type1 = (pkmnData.types[0].type.name);
+        type2 = (pkmnData.types.length > 1) ? pkmnData.types[1].type.name : null;
         stats = getStats("base_stat");
 
         infoBlockProps = getInfoBlockProps();
@@ -30,9 +24,9 @@
 
     function getInfoBlockProps() {
         return {
-            img: data.sprites.other["official-artwork"].front_default,
-            name: data.name,
-            evoChain: evoChain,
+            img: pkmnData.sprites.other["official-artwork"].front_default,
+            name: pkmnData.name,
+            evoChain: pkmnEvolution,
             evs: getStats("effort"),
         }
     }
@@ -40,14 +34,14 @@
     function getStats(statType: string) {
         let newStats : number[] = Array(6);
         for (let i = 0; i < 6; i++) {
-            newStats[i] = data.stats[i][statType]; // statType being either "base_stat" or "effort"
+            newStats[i] = pkmnData.stats[i][statType]; // statType being either "base_stat" or "effort"
         }
         return newStats;
     }
 
     async function getMoves() {
-        let promises: Promise<IMove>[] = Object.keys(data.moves).map(async (index) => {
-            return fetchMove(data.moves[index].move.url);
+        let promises: Promise<IMove>[] = Object.keys(pkmnData.moves).map(async (index) => {
+            return fetchMove(pkmnData.moves[index].move.url);
         });
         return await Promise.all(promises);
 
@@ -66,37 +60,22 @@
             }
         }
     }
-
-    function onTopNavigate(event: Event) {
-        let btn : HTMLButtonElement = event.target as HTMLButtonElement;
-        let slideX : number, route : string;
-        if (btn.id === "prev") {
-            slideX = 300;
-            route = `./${data.id - 1}`;    
-        }
-        else {
-            slideX = -300;
-            route = `./${data.id + 1}`;    
-        }
-        dispatch('setSlideX', {slideX});
-        goto(route, { noscroll : true });
-    }
 </script>
 
 <div class="container my-3" style="--type1: {TypeColors[type1]};">
     <!-- Top NavBar -->
     <div id="pkmnNavBar" class="row mx-2 mt-4 py-3">
         <div class="col">
-            {#if data.id != 1}
-            <button id="prev" class="btn btn-outline-secondary" on:click={onTopNavigate}>Previous</button>
+            {#if pkmnData.id != 1}
+            <button id="prev" class="btn btn-outline-secondary">Previous</button>
             {/if}
         </div>
         <div class="col">
-            <h3>#{data.id}: {data.name}</h3>
+            <h3>#{pkmnData.id}: {pkmnData.name}</h3>
         </div>
         <div class="col">
-            {#if data.id != totalPkmn}
-            <button id="next" class="btn btn-outline-secondary" on:click={onTopNavigate}>Next</button>
+            {#if pkmnData.id != totalPkmn}
+            <button id="next" class="btn btn-outline-secondary">Next</button>
             {/if}
         </div>
     </div>

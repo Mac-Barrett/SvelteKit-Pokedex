@@ -1,3 +1,4 @@
+// General Use Componenets
 import Header from "./_components/Header.svelte";
 import Footer from "./_components/Footer.svelte";
 import Pokerow from "./_components/Pokerow.svelte";
@@ -5,8 +6,11 @@ import MoveRow from "./_components/MoveRow.svelte";
 import AbilityRow from "./_components/AbilityRow.svelte";
 import PageTransitions from "./_components/PageTransitions.svelte";
 
-import PokemonPage from "./_components/PokemonPage/PokemonPage.svelte";
-import TypeEffectivenessBlock from "./_components/PokemonPage/TypeEffectivenessBlock.svelte"
+// Pkmn Page Components
+import TypeEffectivenessBlock from "./_components/TypeEffectivenessBlock.svelte"
+import EvoChainBlock from "./_components/EvoChainBlock.svelte";
+import GeneralInfoBlock from "./_components/GeneralInfoBlock.svelte";
+import StatsBlock from "./_components/StatsBlock.svelte";
 
 export {
     Header,
@@ -16,8 +20,10 @@ export {
     AbilityRow,
     PageTransitions,
 
-    PokemonPage,
-    TypeEffectivenessBlock
+    TypeEffectivenessBlock,
+    EvoChainBlock,
+    GeneralInfoBlock,
+    StatsBlock
 };
 
 export interface IPokemon {

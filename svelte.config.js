@@ -10,13 +10,6 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		vite: {
-            resolve: {
-                alias: {
-                    "$lib": path.resolve("./src/lib/")
-                }
-            }
-        }
 	}
 };
 
