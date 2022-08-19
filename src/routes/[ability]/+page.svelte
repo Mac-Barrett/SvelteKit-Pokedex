@@ -1,18 +1,6 @@
-<script context="module" lang="ts">
-    // @ts-ignore
-    export async function load({ params, fetch }) {
-        const res = await fetch(`https://pokeapi.co/api/v2/ability/${params.ability}`);
-
-        return {
-            status: res.status,
-            props: {
-                ability: res.ok && (await res.json()),
-            }
-        };
-    }
-</script>
-
 <script lang="ts">
+    throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
     import { AbilityRow, type IAbility }from "$lib";
 
     export var ability : any;

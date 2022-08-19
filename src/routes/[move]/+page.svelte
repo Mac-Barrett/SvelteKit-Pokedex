@@ -1,18 +1,6 @@
-<script context="module" lang="ts">
-    // @ts-ignore
-    export async function load({ params, fetch }) {
-        const res = await fetch(`https://pokeapi.co/api/v2/move/${params.move}`);
-
-        return {
-            status: res.status,
-            props: {
-                move: res.ok && (await res.json()),
-            }
-        };
-    }
-</script>
-
 <script lang="ts">
+    throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
     import { MoveRow, type IMove } from "$lib";
     import { TypeColors } from "$lib";
 
